@@ -11,6 +11,7 @@ import java.util.Stack;
 public class BinaryTree {
 
 
+    public static int pIndex=0;
     public Node root;
 
     int maxDepth(Node root) {
@@ -506,68 +507,100 @@ public class BinaryTree {
         return false;
     }
 
-    int findLca(Node root, Node a, Node b){
-        if(root==null)
+    int findLca(Node root, Node a, Node b) {
+        if (root == null)
             return 0;
-        ArrayList<Integer> path1 = new ArrayList<>();
-        ArrayList<Integer> path2= new ArrayList<>();
-        if(!findPath(root,path1,a.data) || findPath(root, path2, b.data))
+        ArrayList<Integer> path1=new ArrayList<>();
+        ArrayList<Integer> path2=new ArrayList<>();
+        if (!findPath(root, path1, a.data) || findPath(root, path2, b.data))
             return 0;
-        for(int i=0; i<path1.size() && i<path2.size();i++){
-            if(path1.get(i)!=path2.get(i))
+        for (int i=0; i < path1.size() && i < path2.size(); i++) {
+            if (path1.get(i) != path2.get(i))
                 break;
-            return path1.get(i-1);
+            return path1.get(i - 1);
         }
         return 0;
     }
-    Node findLcaSimple(Node root, Node a, Node b){
-        if(root==null)
+
+    Node findLcaSimple(Node root, Node a, Node b) {
+        if (root == null)
             return root;
-        if(root.data==a.data || root.data==b.data)
+        if (root.data == a.data || root.data == b.data)
             return root;
         Node lcaLeft=null, lcaright=null;
-        lcaLeft=findLcaSimple(root.left, a,b);
-        lcaright=findLcaSimple(root.right,a,b);
-        if(lcaLeft!=null && lcaright!=null)
+        lcaLeft=findLcaSimple(root.left, a, b);
+        lcaright=findLcaSimple(root.right, a, b);
+        if (lcaLeft != null && lcaright != null)
             return root;
-        return (lcaLeft!=null) ? lcaLeft: lcaright;
+        return (lcaLeft != null) ? lcaLeft : lcaright;
     }
-    public static int pIndex=0;
-    Node constructBinaryTree(int[] preOrder, int [] inOrder, int iStart, int iEnd){
-        if(iStart>iEnd)
+
+    Node constructBinaryTree(int[] preOrder, int[] inOrder, int iStart, int iEnd) {
+        if (iStart > iEnd)
             return null;
 
         Node root=new Node(preOrder[pIndex]);
         pIndex++;
-        if(iStart==iEnd)
+        if (iStart == iEnd)
             return root;
-        int index=getInorderIndex(inOrder, iStart,iEnd,root.data );
-        root.left=constructBinaryTree(preOrder,inOrder,iStart,index-1);
-        root.right=constructBinaryTree(preOrder,inOrder,index+1,iEnd);
+        int index=getInorderIndex(inOrder, iStart, iEnd, root.data);
+        root.left=constructBinaryTree(preOrder, inOrder, iStart, index - 1);
+        root.right=constructBinaryTree(preOrder, inOrder, index + 1, iEnd);
         return root;
 
     }
 
-    int getInorderIndex(int[] inOrder, int iStart, int iEnd, int data){
-        for(int i=iStart;i<=iEnd;i++){
-            if(inOrder[i]==data)
+    int getInorderIndex(int[] inOrder, int iStart, int iEnd, int data) {
+        for (int i=iStart; i <= iEnd; i++) {
+            if (inOrder[i] == data)
                 return i;
         }
         return -1;
     }
-    boolean ancestorOfNode(Node root, int data){
-        if(root==null)
+
+    boolean ancestorOfNode(Node root, int data) {
+        if (root == null)
             return false;
-        if(root.data==data)
+        if (root.data == data)
             return true;
-        if(ancestorOfNode(root.left, data) || ancestorOfNode(root.right, data)){
+        if (ancestorOfNode(root.left, data) || ancestorOfNode(root.right, data)) {
             System.out.print(root.data);
             return true;
         }
         return false;
 
     }
-    
-}
 
+    void zigzagTraversalBst(Node root) {
+        if(root==null)
+            return;
+        Stack<Node> currLevel=new Stack<Node>();
+        Stack<Node> nextLevel=new Stack<Node>();
+        boolean left2right=true;
+        currLevel.add(root);
+        while (!currLevel.isEmpty()) {
+            Node temp=currLevel.pop();
+            System.out.print(temp.data + " ");
+
+            if (left2right){
+                if(temp.left!=null)
+                    nextLevel.push(temp.left);
+                if(temp.right!=null)
+                    nextLevel.push(temp.right);
+                }
+                else{
+                if(temp.right!=null)
+                    nextLevel.push(temp.right);
+                if(temp.left!=null)
+                    nextLevel.push(temp.left);
+            }
+            if(currLevel.isEmpty()){
+                left2right=!left2right;
+                currLevel=nextLevel;
+                nextLevel= new Stack<Node>();
+            }
+        }
+
+    }
+}
 
