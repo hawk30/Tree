@@ -51,6 +51,7 @@ public class Test {
        // System.out.println("lca "+ tree.findLcaSimple(tree.root,tree.root.left, tree.root.right.right).data);
         int [] inOrder = {2,5,6,10,12,14,15};
         int [] preOrder = {10,5,2,6,14,12,15};
-        System.out.println("construct tree "+ tree.constructBinaryTree(preOrder,inOrder,0, inOrder.length-1).data);
+       // System.out.println("construct tree "+ tree.constructBinaryTree(preOrder,inOrder,0, inOrder.length-1).data);
+        tree.ancestorOfNode(tree.root,7);
     }
 }

@@ -555,6 +555,18 @@ public class BinaryTree {
         }
         return -1;
     }
+    boolean ancestorOfNode(Node root, int data){
+        if(root==null)
+            return false;
+        if(root.data==data)
+            return true;
+        if(ancestorOfNode(root.left, data) || ancestorOfNode(root.right, data)){
+            System.out.print(root.data);
+            return true;
+        }
+        return false;
+
+    }
     
 }
 
