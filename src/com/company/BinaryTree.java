@@ -532,6 +532,30 @@ public class BinaryTree {
             return root;
         return (lcaLeft!=null) ? lcaLeft: lcaright;
     }
+    public static int pIndex=0;
+    Node constructBinaryTree(int[] preOrder, int [] inOrder, int iStart, int iEnd){
+        if(iStart>iEnd)
+            return null;
+
+        Node root=new Node(preOrder[pIndex]);
+        pIndex++;
+        if(iStart==iEnd)
+            return root;
+        int index=getInorderIndex(inOrder, iStart,iEnd,root.data );
+        root.left=constructBinaryTree(preOrder,inOrder,iStart,index-1);
+        root.right=constructBinaryTree(preOrder,inOrder,index+1,iEnd);
+        return root;
+
+    }
+
+    int getInorderIndex(int[] inOrder, int iStart, int iEnd, int data){
+        for(int i=iStart;i<=iEnd;i++){
+            if(inOrder[i]==data)
+                return i;
+        }
+        return -1;
+    }
+    
 }
 
 

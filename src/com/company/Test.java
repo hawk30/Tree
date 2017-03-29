@@ -29,7 +29,7 @@ public class Test {
        // tree.leverOrder(tree.root);
         //tree.reverseLevelOrder(tree.root);
         //System.out.println("size of binary tree without recursion "+ tree.sizeOfBinaryTreeWithoutRecursion(tree.root));
-        System.out.println("height "+tree.heightBst( tree.root));
+        //System.out.println("height "+tree.heightBst( tree.root));
        // System.out.println("height without recursion "+ tree.heightBstWithoutRecursion(tree.root));
         //tree.heightBstWithoutRecursion(tree.root);
         //System.out.println("deepest node "+ tree.deepestNode(tree.root).data);
@@ -39,8 +39,8 @@ public class Test {
         //System.out.println("no of full nodes "+ tree.moOfFullNodes(tree.root));
         //System.out.println("diameter "+ tree.diameter(tree.root));
         //System.out.println("level with max sum "+ tree.levelWithMaxSum(tree.root));
-        System.out.printf("all path from root to leaf");
-        tree.allRootsToLeafPath(tree.root, 9);
+        //System.out.printf("all path from root to leaf");
+       // tree.allRootsToLeafPath(tree.root, 9);
         /*System.out.println("path with given sum "+tree.pathWithGivenSumExists(tree.root,9));
         System.out.println(" sum of all elements in bst "+ tree.sumAllElementsBst(tree.root));
         System.out.println("sum all ements using recirsion "+ tree.sumAllElementsBstUsingRecursion(tree.root));
@@ -48,6 +48,9 @@ public class Test {
         System.out.println("mirror of a tree without recursion "+ tree.mirrorTreeWithoutRecursion(tree.root));
         System.out.println("if two trees are mirror "+ tree.chkMirror(tree.root,tree.root));*/
        // System.out.println("lca "+ tree.findLca(tree.root,tree.root.left, tree.root.right.right));
-        System.out.println("lca "+ tree.findLcaSimple(tree.root,tree.root.left, tree.root.right.right).data);
+       // System.out.println("lca "+ tree.findLcaSimple(tree.root,tree.root.left, tree.root.right.right).data);
+        int [] inOrder = {2,5,6,10,12,14,15};
+        int [] preOrder = {10,5,2,6,14,12,15};
+        System.out.println("construct tree "+ tree.constructBinaryTree(preOrder,inOrder,0, inOrder.length-1).data);
     }
 }
