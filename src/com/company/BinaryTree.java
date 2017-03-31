@@ -619,5 +619,42 @@ public class BinaryTree {
         while (!stk.isEmpty())
             System.out.print(stk.pop().data);
     }
+
+    void reverseZigZag(Node root){
+        if(root==null)
+            return;
+        Stack<Node> curr= new Stack<>();
+        Stack<Node> next= new Stack<>();
+        Stack<Node> reverse= new Stack<>();
+        curr.push(root);
+        boolean left2right=true;
+        while(!curr.isEmpty()){
+            Node temp=curr.pop();
+            reverse.push(temp);
+            if(left2right){
+                if(temp.left!=null)
+                    next.push(temp.left);
+                if(temp.right!=null)
+                    next.push(temp.right);
+
+            }
+            else{
+                if(temp.right!=null)
+                    next.push(temp.right);
+                if(temp.left!=null)
+                    next.push(temp.left);
+            }
+            if(curr.isEmpty()){
+                left2right=!left2right;
+                curr=next;
+                next=new Stack<>();
+            }
+
+        }
+        while (!reverse.isEmpty())
+            System.out.print(reverse.pop().data);
+
+
+    }
 }
 
