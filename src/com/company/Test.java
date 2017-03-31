@@ -54,6 +54,7 @@ public class Test {
         int [] preOrder = {10,5,2,6,14,12,15};
        // System.out.println("construct tree "+ tree.constructBinaryTree(preOrder,inOrder,0, inOrder.length-1).data);
         //tree.ancestorOfNode(tree.root,7);
-        tree.zigzagTraversalBst(tree.root);
+        //tree.zigzagTraversalBst(tree.root);
+        tree.printingTreeInReverseOrder(tree.root);
     }
 }

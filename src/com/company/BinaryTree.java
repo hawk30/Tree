@@ -602,5 +602,22 @@ public class BinaryTree {
         }
 
     }
+    void printingTreeInReverseOrder(Node root){
+        if(root==null)
+            return;
+        Queue<Node> lst= new LinkedList<>();
+        Stack<Node> stk= new Stack<>();
+        lst.add(root);
+        while(!lst.isEmpty()){
+            Node temp= lst.poll();
+            stk.push(temp);
+            if(temp.left!=null)
+                lst.add(temp.left);
+            if(temp.right!=null)
+                lst.add(temp.right);
+        }
+        while (!stk.isEmpty())
+            System.out.print(stk.pop().data);
+    }
 }
 
