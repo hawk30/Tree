@@ -1,9 +1,8 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import com.sun.xml.internal.bind.v2.util.QNameMap;
+
+import java.util.*;
 
 /**
  * Created by gaurav on 19/3/17.
@@ -11,15 +10,15 @@ import java.util.Stack;
 public class BinaryTree {
 
 
-    public static int pIndex=0;
+    public static int pIndex = 0;
     public Node root;
 
     int maxDepth(Node root) {
         if (root == null)
             return -1;
 
-        int hLeft=maxDepth(root.left);
-        int hRight=maxDepth(root.right);
+        int hLeft = maxDepth(root.left);
+        int hRight = maxDepth(root.right);
         if (hLeft > hRight)
             return 1 + hLeft;
         else
@@ -31,49 +30,49 @@ public class BinaryTree {
     int maxElement(Node root) {
         if (root == null)
             return -1;
-        int rootVal=root.data;
-        int max=Integer.MIN_VALUE;
-        int maxLeft=0;
-        int maxRight=0;
-        maxLeft=maxElement(root.left);
-        maxRight=maxElement(root.right);
+        int rootVal = root.data;
+        int max = Integer.MIN_VALUE;
+        int maxLeft = 0;
+        int maxRight = 0;
+        maxLeft = maxElement(root.left);
+        maxRight = maxElement(root.right);
         if (maxLeft > maxRight)
-            max=maxLeft;
+            max = maxLeft;
         else
-            max=maxRight;
+            max = maxRight;
 
         if (rootVal > max)
-            max=rootVal;
+            max = rootVal;
         return max;
 
     }
 
     int maxElementWithoutRecursion(Node root) {
-        int rootVal=root.data;
-        int max=Integer.MIN_VALUE;
+        int rootVal = root.data;
+        int max = Integer.MIN_VALUE;
         if (root == null)
             return -1;
-        int maxLeft=0, maxRight=0;
+        int maxLeft = 0, maxRight = 0;
         if (root.left != null)
-            maxLeft=maxElementWithoutRecursion(root.left);
+            maxLeft = maxElementWithoutRecursion(root.left);
         if (root.right != null)
-            maxRight=maxElementWithoutRecursion(root.right);
+            maxRight = maxElementWithoutRecursion(root.right);
         if (maxLeft > maxRight)
-            max=maxLeft;
+            max = maxLeft;
         else
-            max=maxRight;
+            max = maxRight;
         if (rootVal > max)
-            max=rootVal;
+            max = rootVal;
         return max;
     }
 
     boolean searchElement(Node root, int k) {
         if (root == null)
             return false;
-        Queue<Node> list=new LinkedList<>();
+        Queue<Node> list = new LinkedList<>();
         list.add(root);
         while (!list.isEmpty()) {
-            Node temp=list.poll();
+            Node temp = list.poll();
             if (temp.data == k) {
                 System.out.println("element is " + k);
                 return true;
@@ -99,23 +98,23 @@ public class BinaryTree {
 
     void insertElement(Node root, int k) {
 
-        Node newNode=new Node(k);
-        newNode.left=null;
-        newNode.right=null;
+        Node newNode = new Node(k);
+        newNode.left = null;
+        newNode.right = null;
         if (root == null)
-            root=newNode;
-        Queue<Node> list=new LinkedList<>();
+            root = newNode;
+        Queue<Node> list = new LinkedList<>();
         list.add(root);
         while (!list.isEmpty()) {
-            Node temp=list.poll();
+            Node temp = list.poll();
             if (temp.left != null)
                 list.add(temp.left);
             else
-                temp.left=newNode;
+                temp.left = newNode;
             if (temp.right != null)
                 list.add(temp.right);
             else
-                temp.right=newNode;
+                temp.right = newNode;
         }
     }
 
@@ -137,12 +136,12 @@ public class BinaryTree {
     }
 
     int sizeOfBinaryTreeWithoutRecursion(Node root) {
-        int count=0;
-        Queue<Node> list=new LinkedList<>();
+        int count = 0;
+        Queue<Node> list = new LinkedList<>();
         list.add(root);
         while (!list.isEmpty()) {
             count++;
-            Node temp=list.poll();
+            Node temp = list.poll();
             if (temp.left != null)
                 list.add(temp.left);
             if (temp.right != null)
@@ -156,15 +155,15 @@ public class BinaryTree {
             return;
         deleteTree(root.left);
         deleteTree(root.right);
-        root=null;
+        root = null;
     }
 
     void leverOrder(Node root) {
         if (root == null) return;
-        Queue<Node> list=new LinkedList<>();
+        Queue<Node> list = new LinkedList<>();
         list.add(root);
         while (!list.isEmpty()) {
-            Node temp=list.poll();
+            Node temp = list.poll();
             System.out.println(temp.data);
             if (temp.left != null)
                 list.add(temp.left);
@@ -177,11 +176,11 @@ public class BinaryTree {
     void reverseLevelOrder(Node root) {
         if (root == null)
             return;
-        Queue<Node> list=new LinkedList<>();
-        Stack<Node> stk=new Stack<>();
+        Queue<Node> list = new LinkedList<>();
+        Stack<Node> stk = new Stack<>();
         list.add(root);
         while (!list.isEmpty()) {
-            Node temp=list.poll();
+            Node temp = list.poll();
             if (temp.right != null)
                 list.add(temp.right);
             if (temp.left != null)
@@ -199,9 +198,9 @@ public class BinaryTree {
     int heightBst(Node root) {
         if (root == null)
             return 0;
-        int hLeft=0, hRight=0;
-        hLeft=heightBst(root.left);
-        hRight=heightBst(root.right);
+        int hLeft = 0, hRight = 0;
+        hLeft = heightBst(root.left);
+        hRight = heightBst(root.right);
         return hLeft > hRight ? hLeft + 1 : hRight + 1;
     }
 
@@ -221,12 +220,12 @@ public class BinaryTree {
         return hLeft > hRight ? hLeft+1 : hRight +1;*/
         if (root == null)
             return 0;
-        Queue<Node> list=new LinkedList<>();
+        Queue<Node> list = new LinkedList<>();
         list.add(root);
         list.add(null);
-        int level=1;
+        int level = 1;
         while (!list.isEmpty()) {
-            Node temp=list.poll();
+            Node temp = list.poll();
             if (temp == null) {
                 if (!list.isEmpty())
                     list.add(null);
@@ -246,11 +245,11 @@ public class BinaryTree {
     Node deepestNode(Node root) {
         if (root == null)
             return null;
-        Queue<Node> list=new LinkedList<>();
+        Queue<Node> list = new LinkedList<>();
         list.add(root);
-        Node temp=null;
+        Node temp = null;
         while (!list.isEmpty()) {
-            temp=list.poll();
+            temp = list.poll();
             if (temp.left != null)
                 list.add(temp.left);
             if (temp.right != null)
@@ -264,21 +263,21 @@ public class BinaryTree {
         if (root == null)
             return root;
         if (k < root.data)
-            root.left=deleteElement(root.left, k);
+            root.left = deleteElement(root.left, k);
         else if (k > root.data)
-            root.right=deleteElement(root.right, k);
+            root.right = deleteElement(root.right, k);
         else {
             if (root.left != null && root.right != null) {
-                Node temp=root;
-                Node minElementRight=minimumElement(root.right);
-                root.data=minElementRight.data;
+                Node temp = root;
+                Node minElementRight = minimumElement(root.right);
+                root.data = minElementRight.data;
                 deleteElement(root.right, minElementRight.data);
             } else if (root.left != null)
-                root=root.left;
+                root = root.left;
             else if (root.right != null)
-                root=root.right;
+                root = root.right;
             else
-                root=null;
+                root = null;
         }
         return root;
 
@@ -293,11 +292,11 @@ public class BinaryTree {
     int numberOfLeaves(Node root) {
         if (root == null)
             return -1;
-        Queue<Node> list=new LinkedList<>();
+        Queue<Node> list = new LinkedList<>();
         list.add(root);
-        int countLeaves=0;
+        int countLeaves = 0;
         while (!list.isEmpty()) {
-            Node temp=list.poll();
+            Node temp = list.poll();
             if (temp.left == null && temp.right == null)
                 countLeaves++;
             if (temp.left != null)
@@ -311,11 +310,11 @@ public class BinaryTree {
     int moOfFullNodes(Node root) {
         if (root == null)
             return -1;
-        Queue<Node> list=new LinkedList<>();
+        Queue<Node> list = new LinkedList<>();
         list.add(root);
-        int countFullNodes=0;
+        int countFullNodes = 0;
         while (!list.isEmpty()) {
-            Node temp=list.poll();
+            Node temp = list.poll();
             if (temp.left != null && temp.right != null) {
                 countFullNodes++;
                 if (temp.left != null)
@@ -342,41 +341,41 @@ public class BinaryTree {
     int diameter(Node root) {
         if (root == null)
             return 0;
-        int hLeft=0, hright=0, dLeft=0, dRight=0;
-        hLeft=diameter(root.left);
-        hright=diameter(root.right);
-        dLeft=diameter(root.left);
-        dRight=diameter(root.right);
+        int hLeft = 0, hright = 0, dLeft = 0, dRight = 0;
+        hLeft = diameter(root.left);
+        hright = diameter(root.right);
+        dLeft = diameter(root.left);
+        dRight = diameter(root.right);
         return Math.max((hLeft + hright + 1), Math.max(dLeft, dRight));
     }
 
     int levelWithMaxSum(Node root) {
         if (root == null)
             return 0;
-        Queue<Node> list=new LinkedList<>();
+        Queue<Node> list = new LinkedList<>();
         list.add(root);
         list.add(null);
 
-        int maxLevel=0, level=0;
-        int currSum=0, maxSum=0;
+        int maxLevel = 0, level = 0;
+        int currSum = 0, maxSum = 0;
 
         while (!list.isEmpty()) {
 
-            Node temp=list.poll();
+            Node temp = list.poll();
 
             if (temp == null) {
                 if (currSum > maxSum) {
-                    maxSum=currSum;
-                    maxLevel=level;
+                    maxSum = currSum;
+                    maxLevel = level;
 
                 }
-                currSum=0;
+                currSum = 0;
 
                 if (!list.isEmpty())
                     list.add(null);
                 level++;
             } else {
-                currSum+=temp.data;
+                currSum += temp.data;
                 if (temp.left != null)
                     list.add(temp.left);
                 if (temp.right != null)
@@ -391,7 +390,7 @@ public class BinaryTree {
     void allRootsToLeafPath(Node root, int sum) {
         if (root == null)
             return;
-        ArrayList<Integer> path=new ArrayList<>();
+        ArrayList<Integer> path = new ArrayList<>();
         allRootsToLeafPathRec(root, path, sum);
 
 
@@ -418,28 +417,28 @@ public class BinaryTree {
     }
 
     boolean pathWithGivenSumExists(Node root, int sum) {
-        boolean ans=false;
+        boolean ans = false;
         if (root == null)
             return false;
-        sum-=root.data;
+        sum -= root.data;
         if (sum == 0 && root.left == null && root.right == null)
             return true;
         if (root.left != null)
-            ans=ans || pathWithGivenSumExists(root.left, sum);
+            ans = ans || pathWithGivenSumExists(root.left, sum);
         if (root.right != null)
-            ans=ans || pathWithGivenSumExists(root.right, sum);
+            ans = ans || pathWithGivenSumExists(root.right, sum);
         return ans;
     }
 
     int sumAllElementsBst(Node root) {
         if (root == null)
             return 0;
-        int sum=0;
-        Queue<Node> list=new LinkedList<>();
+        int sum = 0;
+        Queue<Node> list = new LinkedList<>();
         list.add(root);
         while (!list.isEmpty()) {
-            Node temp=list.poll();
-            sum+=temp.data;
+            Node temp = list.poll();
+            sum += temp.data;
             if (temp.left != null)
                 list.add(temp.left);
             if (temp.right != null)
@@ -460,9 +459,9 @@ public class BinaryTree {
             return null;
         mirrorOfTree(root.left);
         mirrorOfTree(root.right);
-        Node temp=root.left;
-        root.left=root.right;
-        root.right=temp;
+        Node temp = root.left;
+        root.left = root.right;
+        root.right = temp;
         return root;
 
     }
@@ -470,13 +469,13 @@ public class BinaryTree {
     Node mirrorTreeWithoutRecursion(Node root) {
         if (root == null)
             return root;
-        Queue<Node> lst=new LinkedList<>();
+        Queue<Node> lst = new LinkedList<>();
         lst.add(root);
         while (!lst.isEmpty()) {
-            Node temp=lst.poll();
-            Node temp2=temp.left;
-            temp.left=temp.right;
-            temp.right=temp2;
+            Node temp = lst.poll();
+            Node temp2 = temp.left;
+            temp.left = temp.right;
+            temp.right = temp2;
             if (temp.left != null)
                 lst.add(temp.left);
             if (temp.right != null)
@@ -510,11 +509,11 @@ public class BinaryTree {
     int findLca(Node root, Node a, Node b) {
         if (root == null)
             return 0;
-        ArrayList<Integer> path1=new ArrayList<>();
-        ArrayList<Integer> path2=new ArrayList<>();
+        ArrayList<Integer> path1 = new ArrayList<>();
+        ArrayList<Integer> path2 = new ArrayList<>();
         if (!findPath(root, path1, a.data) || findPath(root, path2, b.data))
             return 0;
-        for (int i=0; i < path1.size() && i < path2.size(); i++) {
+        for (int i = 0; i < path1.size() && i < path2.size(); i++) {
             if (path1.get(i) != path2.get(i))
                 break;
             return path1.get(i - 1);
@@ -527,9 +526,9 @@ public class BinaryTree {
             return root;
         if (root.data == a.data || root.data == b.data)
             return root;
-        Node lcaLeft=null, lcaright=null;
-        lcaLeft=findLcaSimple(root.left, a, b);
-        lcaright=findLcaSimple(root.right, a, b);
+        Node lcaLeft = null, lcaright = null;
+        lcaLeft = findLcaSimple(root.left, a, b);
+        lcaright = findLcaSimple(root.right, a, b);
         if (lcaLeft != null && lcaright != null)
             return root;
         return (lcaLeft != null) ? lcaLeft : lcaright;
@@ -539,19 +538,19 @@ public class BinaryTree {
         if (iStart > iEnd)
             return null;
 
-        Node root=new Node(preOrder[pIndex]);
+        Node root = new Node(preOrder[pIndex]);
         pIndex++;
         if (iStart == iEnd)
             return root;
-        int index=getInorderIndex(inOrder, iStart, iEnd, root.data);
-        root.left=constructBinaryTree(preOrder, inOrder, iStart, index - 1);
-        root.right=constructBinaryTree(preOrder, inOrder, index + 1, iEnd);
+        int index = getInorderIndex(inOrder, iStart, iEnd, root.data);
+        root.left = constructBinaryTree(preOrder, inOrder, iStart, index - 1);
+        root.right = constructBinaryTree(preOrder, inOrder, index + 1, iEnd);
         return root;
 
     }
 
     int getInorderIndex(int[] inOrder, int iStart, int iEnd, int data) {
-        for (int i=iStart; i <= iEnd; i++) {
+        for (int i = iStart; i <= iEnd; i++) {
             if (inOrder[i] == data)
                 return i;
         }
@@ -572,89 +571,127 @@ public class BinaryTree {
     }
 
     void zigzagTraversalBst(Node root) {
-        if(root==null)
+        if (root == null)
             return;
-        Stack<Node> currLevel=new Stack<Node>();
-        Stack<Node> nextLevel=new Stack<Node>();
-        boolean left2right=true;
+        Stack<Node> currLevel = new Stack<Node>();
+        Stack<Node> nextLevel = new Stack<Node>();
+        boolean left2right = true;
         currLevel.add(root);
         while (!currLevel.isEmpty()) {
-            Node temp=currLevel.pop();
+            Node temp = currLevel.pop();
             System.out.print(temp.data + " ");
 
-            if (left2right){
-                if(temp.left!=null)
+            if (left2right) {
+                if (temp.left != null)
                     nextLevel.push(temp.left);
-                if(temp.right!=null)
+                if (temp.right != null)
                     nextLevel.push(temp.right);
-                }
-                else{
-                if(temp.right!=null)
+            } else {
+                if (temp.right != null)
                     nextLevel.push(temp.right);
-                if(temp.left!=null)
+                if (temp.left != null)
                     nextLevel.push(temp.left);
             }
-            if(currLevel.isEmpty()){
-                left2right=!left2right;
-                currLevel=nextLevel;
-                nextLevel= new Stack<Node>();
+            if (currLevel.isEmpty()) {
+                left2right = !left2right;
+                currLevel = nextLevel;
+                nextLevel = new Stack<Node>();
             }
         }
 
     }
-    void printingTreeInReverseOrder(Node root){
-        if(root==null)
+
+    void printingTreeInReverseOrder(Node root) {
+        if (root == null)
             return;
-        Queue<Node> lst= new LinkedList<>();
-        Stack<Node> stk= new Stack<>();
+        Queue<Node> lst = new LinkedList<>();
+        Stack<Node> stk = new Stack<>();
         lst.add(root);
-        while(!lst.isEmpty()){
-            Node temp= lst.poll();
+        while (!lst.isEmpty()) {
+            Node temp = lst.poll();
             stk.push(temp);
-            if(temp.left!=null)
+            if (temp.left != null)
                 lst.add(temp.left);
-            if(temp.right!=null)
+            if (temp.right != null)
                 lst.add(temp.right);
         }
         while (!stk.isEmpty())
             System.out.print(stk.pop().data);
     }
 
-    void reverseZigZag(Node root){
-        if(root==null)
+    void reverseZigZag(Node root) {
+        if (root == null)
             return;
-        Stack<Node> curr= new Stack<>();
-        Stack<Node> next= new Stack<>();
-        Stack<Node> reverse= new Stack<>();
+        Stack<Node> curr = new Stack<>();
+        Stack<Node> next = new Stack<>();
+        Stack<Node> reverse = new Stack<>();
         curr.push(root);
-        boolean left2right=true;
-        while(!curr.isEmpty()){
-            Node temp=curr.pop();
+        boolean left2right = true;
+        while (!curr.isEmpty()) {
+            Node temp = curr.pop();
             reverse.push(temp);
-            if(left2right){
-                if(temp.left!=null)
+            if (left2right) {
+                if (temp.left != null)
                     next.push(temp.left);
-                if(temp.right!=null)
+                if (temp.right != null)
                     next.push(temp.right);
 
-            }
-            else{
-                if(temp.right!=null)
+            } else {
+                if (temp.right != null)
                     next.push(temp.right);
-                if(temp.left!=null)
+                if (temp.left != null)
                     next.push(temp.left);
             }
-            if(curr.isEmpty()){
-                left2right=!left2right;
-                curr=next;
-                next=new Stack<>();
+            if (curr.isEmpty()) {
+                left2right = !left2right;
+                curr = next;
+                next = new Stack<>();
             }
 
         }
         while (!reverse.isEmpty())
             System.out.print(reverse.pop().data);
-
-
     }
+   void verticalSUmBinaryTree(Node root){
+       if(root==null)
+           return;
+       HashMap<Integer,Integer> map= new HashMap<>();
+       int hd=0;
+       verticalSUmBinaryTreeUtils(root,map,hd);
+       if(map.entrySet()!=null)
+           System.out.println(map.entrySet());
+
+       }
+    void verticalSUmBinaryTreeUtils(Node root, HashMap<Integer, Integer> map, int hd){
+        if(root==null)
+            return;
+        verticalSUmBinaryTreeUtils(root.left,map,hd-1);
+        int prevSum=(map.get(hd)==null)?0:map.get(hd);
+        map.put(hd,prevSum+root.data);
+        verticalSUmBinaryTreeUtils(root.right,map,hd+1);
+    }
+    int noOfTreesWithNNodes(int n){
+        if(n<=0)
+            return -1;
+        return (int)Math.pow(2,n)-n;
+    }
+    Node giverPreOrderTraversal(int[] preOrder, int i){
+        //leaf nodes are represented by 'L' and internal nodes are represented by 'I;
+        // further each node can have either 2 children or 0 child
+        //i.e if a node has 1 child then it's sibling also exists
+        if(preOrder==null)
+            return null;
+        Node newNode= new Node(preOrder[i]);
+        newNode.left=null;
+        newNode.right=null;
+        if(preOrder[i]=='L')
+            return newNode;
+        i+=1;
+        newNode.left= giverPreOrderTraversal(preOrder,i);
+        i+=1;
+        newNode.right=giverPreOrderTraversal(preOrder,i);
+        return newNode;
+    }
+
 }
 
