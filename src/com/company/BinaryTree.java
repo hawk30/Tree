@@ -26,24 +26,24 @@ public class BinaryTree {
                     1 + hRight;
 
     }
-
+    // max element using recursion:
+    //1. compare the values of root, it's left subtree and it's right sub tree
+    //2. find max among them
+    //3. do this recursively for all the nodes
     int maxElement(Node root) {
         if (root == null)
             return -1;
-        int rootVal = root.data;
-        int max = Integer.MIN_VALUE;
         int maxLeft = 0;
         int maxRight = 0;
+        int rootVal = root.data;
         maxLeft = maxElement(root.left);
         maxRight = maxElement(root.right);
-        if (maxLeft > maxRight)
-            max = maxLeft;
-        else
-            max = maxRight;
+        if (maxLeft > rootVal)
+           rootVal=maxLeft;
+        if(maxRight>rootVal)
+            rootVal=maxRight;
+        return rootVal;
 
-        if (rootVal > max)
-            max = rootVal;
-        return max;
 
     }
 

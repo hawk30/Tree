@@ -15,8 +15,8 @@ public class Test {
         tree.root.right.right = new Node(7);
         //tree.root.left.right.right.left = new Node(71);
         //System.out.println("max depth "+ tree.maxDepth(tree.root));
-        //System.out.println("max element "+ tree.maxElement(tree.root));
-        System.out.println("max element "+ tree.maxElementWithoutRecursion(tree.root));
+        System.out.println("max element "+ tree.maxElement(tree.root));
+        //System.out.println("max element "+ tree.maxElementWithoutRecursion(tree.root));
         //System.out.println("element found ? "+ tree.searchElement(tree.root,4));
         //System.out.println("element found ? "+ tree.searchElementUsingRecursion(tree.root,648));
         //tree.insertElement(tree.root,67);
