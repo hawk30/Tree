@@ -48,21 +48,20 @@ public class BinaryTree {
     }
 
     int maxElementWithoutRecursion(Node root) {
-        int rootVal = root.data;
-        int max = Integer.MIN_VALUE;
-        if (root == null)
+        if(root==null)
             return -1;
-        int maxLeft = 0, maxRight = 0;
-        if (root.left != null)
-            maxLeft = maxElementWithoutRecursion(root.left);
-        if (root.right != null)
-            maxRight = maxElementWithoutRecursion(root.right);
-        if (maxLeft > maxRight)
-            max = maxLeft;
-        else
-            max = maxRight;
-        if (rootVal > max)
-            max = rootVal;
+        Queue<Node> queue= new LinkedList<>();
+        queue.add(root);
+        int max= Integer.MIN_VALUE;
+        while(!queue.isEmpty()){
+            Node temp=queue.poll();
+            if(temp.data>max)
+                max=temp.data;
+            if(temp.left!=null)
+                queue.add(temp.left);
+            if(temp.right!=null)
+                queue.add(temp.right);
+        }
         return max;
     }
 
@@ -652,46 +651,126 @@ public class BinaryTree {
         while (!reverse.isEmpty())
             System.out.print(reverse.pop().data);
     }
-   void verticalSUmBinaryTree(Node root){
-       if(root==null)
-           return;
-       HashMap<Integer,Integer> map= new HashMap<>();
-       int hd=0;
-       verticalSUmBinaryTreeUtils(root,map,hd);
-       if(map.entrySet()!=null)
-           System.out.println(map.entrySet());
 
-       }
-    void verticalSUmBinaryTreeUtils(Node root, HashMap<Integer, Integer> map, int hd){
-        if(root==null)
+    void verticalSUmBinaryTree(Node root) {
+        if (root == null)
             return;
-        verticalSUmBinaryTreeUtils(root.left,map,hd-1);
-        int prevSum=(map.get(hd)==null)?0:map.get(hd);
-        map.put(hd,prevSum+root.data);
-        verticalSUmBinaryTreeUtils(root.right,map,hd+1);
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int hd = 0;
+        verticalSUmBinaryTreeUtils(root, map, hd);
+        if (map.entrySet() != null)
+            System.out.println(map.entrySet());
+
     }
-    int noOfTreesWithNNodes(int n){
-        if(n<=0)
+
+    void verticalSUmBinaryTreeUtils(Node root, HashMap<Integer, Integer> map, int hd) {
+        if (root == null)
+            return;
+        verticalSUmBinaryTreeUtils(root.left, map, hd - 1);
+        int prevSum = (map.get(hd) == null) ? 0 : map.get(hd);
+        map.put(hd, prevSum + root.data);
+        verticalSUmBinaryTreeUtils(root.right, map, hd + 1);
+    }
+
+    int noOfTreesWithNNodes(int n) {
+        if (n <= 0)
             return -1;
-        return (int)Math.pow(2,n)-n;
+        return (int) Math.pow(2, n) - n;
     }
-    Node giverPreOrderTraversal(int[] preOrder, int i){
+
+    Node giverPreOrderTraversal(int[] preOrder, int i) {
         //leaf nodes are represented by 'L' and internal nodes are represented by 'I;
         // further each node can have either 2 children or 0 child
         //i.e if a node has 1 child then it's sibling also exists
-        if(preOrder==null)
+        if (preOrder == null)
             return null;
-        Node newNode= new Node(preOrder[i]);
-        newNode.left=null;
-        newNode.right=null;
-        if(preOrder[i]=='L')
+        Node newNode = new Node(preOrder[i]);
+        newNode.left = null;
+        newNode.right = null;
+        if (preOrder[i] == 'L')
             return newNode;
-        i+=1;
-        newNode.left= giverPreOrderTraversal(preOrder,i);
-        i+=1;
-        newNode.right=giverPreOrderTraversal(preOrder,i);
+        i += 1;
+        newNode.left = giverPreOrderTraversal(preOrder, i);
+        i += 1;
+        newNode.right = giverPreOrderTraversal(preOrder, i);
         return newNode;
     }
 
+    void verticalOrderTraversal(Node root) {
+        if (root == null)
+            return;
+        TreeMap<Integer, String> map = new TreeMap<>();
+        int hd = 0;
+        verticalOrderTraversalUtils(root, map, hd);
+        for (Map.Entry<Integer, String> entry : map.entrySet()) {
+            System.out.println(entry.getValue());
+        }
+    }
+
+
+    void verticalOrderTraversalUtils(Node root, TreeMap<Integer, String> map, int hd) {
+        if (root == null)
+            return;
+
+
+        if (map.get(hd) == null)
+            map.put(hd, String.valueOf(root.data));
+        else
+            map.put(hd, String.valueOf(root.data + map.get(hd)));
+        verticalOrderTraversalUtils(root.left, map, hd - 1);
+        verticalOrderTraversalUtils(root.right, map, hd + 1);
+
+    }
+
+    void InOredrWithoutRecursion(Node root) {
+        if (root == null)
+            return;
+        Stack<Node> stk = new Stack<Node>();
+        while (true) {
+            while (root != null) {
+                stk.push(root);
+                root = root.left;
+            }
+            while (stk.isEmpty())
+                return;
+            root = stk.pop();
+            System.out.print(root.data + " ");
+            root=root.right;
+        }
+
+    }
+    void preOrderTraversalWithoutRecursion(Node root){
+        if(root==null)
+            return;
+        Stack<Node> stk= new Stack<>();
+        while (true){
+            while(root!=null){
+                System.out.print(root.data+" ");
+                stk.push(root);
+                root=root.left;
+            }
+            if(stk.isEmpty())
+                return;
+            root=stk.pop();
+            root=root.right;
+        }
+    }
+    void postOrderTraversalWithoutRecursion(Node root){
+        if(root==null)
+            return;
+        Stack<Node> stk1= new Stack<>();
+        Stack<Node> stk2= new Stack<>();
+        stk1.push(root);
+        while(!stk1.isEmpty()){
+            stk2.push(stk1.pop());
+            stk1.push(root.left);
+            stk1.push(root.right);
+
+        }
+        while(!stk2.isEmpty())
+            System.out.print(stk2.pop().data);
+    }
 }
+
+
 

@@ -14,16 +14,16 @@ public class Test {
         tree.root.right.left = new Node(6);
         tree.root.right.right = new Node(7);
         //tree.root.left.right.right.left = new Node(71);
-        System.out.println("max depth "+ tree.maxDepth(tree.root));
+        //System.out.println("max depth "+ tree.maxDepth(tree.root));
         //System.out.println("max element "+ tree.maxElement(tree.root));
-        //System.out.println("max element "+ tree.maxElementWithoutRecursion(tree.root));
+        System.out.println("max element "+ tree.maxElementWithoutRecursion(tree.root));
         //System.out.println("element found ? "+ tree.searchElement(tree.root,4));
         //System.out.println("element found ? "+ tree.searchElementUsingRecursion(tree.root,648));
         //tree.insertElement(tree.root,67);
         //tree.insertElement(tree.root,80);
-        System.out.println("max element "+ tree.maxElementWithoutRecursion(tree.root));
-        System.out.println("size of binary tree "+ tree.sizeBinaryTree(tree.root));
-        System.out.println("size of binary tree without recursion "+ tree.sizeOfBinaryTreeWithoutRecursion(tree.root));
+        //System.out.println("max element "+ tree.maxElementWithoutRecursion(tree.root));
+        //System.out.println("size of binary tree "+ tree.sizeBinaryTree(tree.root));
+        //System.out.println("size of binary tree without recursion "+ tree.sizeOfBinaryTreeWithoutRecursion(tree.root));
         //tree.deleteTree(tree.root);
         //System.out.println("size of binary tree without recursion "+ tree.sizeOfBinaryTreeWithoutRecursion(tree.root));
         //System.out.println("level order");
@@ -57,7 +57,11 @@ public class Test {
        // tree.zigzagTraversalBst(tree.root);
         //tree.printingTreeInReverseOrder(tree.root);
         //tree.reverseZigZag(tree.root);
-        tree.verticalSUmBinaryTree(tree.root);
-        System.out.println("no of trees with n nodes "+ tree.noOfTreesWithNNodes(3));
+        //tree.verticalSUmBinaryTree(tree.root);
+        //System.out.println("no of trees with n nodes "+ tree.noOfTreesWithNNodes(3));
+       // tree.verticalOrderTraversal(tree.root);
+        //tree.InOredrWithoutRecursion(tree.root);
+        //tree.preOrderTraversalWithoutRecursion(tree.root);
+        //tree.postOrderTraversalWithoutRecursion(tree.root);
     }
 }
