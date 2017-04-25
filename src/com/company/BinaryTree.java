@@ -13,6 +13,9 @@ public class BinaryTree {
     public static int pIndex = 0;
     public Node root;
 
+    //1. find max depth of left subtree
+    //2. find max depth of right subtree
+    //3. find max among them
     int maxDepth(Node root) {
         if (root == null)
             return -1;
