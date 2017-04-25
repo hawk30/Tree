@@ -88,6 +88,9 @@ public class BinaryTree {
 
     }
 
+    //1. compare element with the root
+    //2. if it's not equal, compare with it's left child and right child
+    //3. do this recursilvely for all nodes
     boolean searchElementUsingRecursion(Node root, int k) {
         if (root == null)
             return false;
@@ -98,11 +101,14 @@ public class BinaryTree {
 
     }
 
+    //1. find the 1st null left/ right child
+    //2. insert there
     void insertElement(Node root, int k) {
 
         Node newNode = new Node(k);
         newNode.left = null;
         newNode.right = null;
+        newNode.data=k;
         if (root == null)
             root = newNode;
         Queue<Node> list = new LinkedList<>();
