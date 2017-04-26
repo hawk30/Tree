@@ -125,6 +125,44 @@ public class BinaryTree {
                 temp.right = newNode;
         }
     }
+    //.insert into BST; recursively
+    Node insertBST(Node root, int key){
+        Node newNode= new Node();
+        newNode.left=null;
+        newNode.right=null;
+        newNode.data=key;
+        if(root==null)
+            root=newNode;
+        if(key<root.data)
+            root.left=insertBST(root.left,key);
+        if(key>root.data)
+            root.right=insertBST(root.right,key);
+        return root;
+    }
+
+    //insert into BST non-recursively
+    Node insertBSTNonRecursively(Node root, int key){
+        Node newNode= new Node();
+        newNode.left=null;
+        newNode.right=null;
+        newNode.data=key;
+        Node temp=root;
+
+        while(temp!=null){
+            if(key<root.data)
+                temp=temp.left;
+            else if(key>temp.data)
+                temp=temp.right;
+            else
+                if(key==temp.data)
+                    temp.data=key; //overrite
+        }
+        if(key<temp.data)
+            temp.left=newNode;
+        else
+            temp.right=newNode;
+    }
+
 
     int sizeBinaryTree(Node root) {
  /*       int sLeft=0, sRight=0;
